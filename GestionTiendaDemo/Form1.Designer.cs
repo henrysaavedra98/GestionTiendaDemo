@@ -37,6 +37,8 @@
             chkClienteFrecuente = new CheckBox();
             rbMasculino = new RadioButton();
             rbFemenino = new RadioButton();
+            dgvClientes = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -78,7 +80,7 @@
             // btRegistrar
             // 
             btRegistrar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btRegistrar.Location = new Point(187, 355);
+            btRegistrar.Location = new Point(545, 150);
             btRegistrar.Name = "btRegistrar";
             btRegistrar.Size = new Size(290, 77);
             btRegistrar.TabIndex = 4;
@@ -91,7 +93,7 @@
             cmbFormaPago.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbFormaPago.FormattingEnabled = true;
             cmbFormaPago.Items.AddRange(new object[] { "Contado", "Credito" });
-            cmbFormaPago.Location = new Point(118, 164);
+            cmbFormaPago.Location = new Point(630, 27);
             cmbFormaPago.Name = "cmbFormaPago";
             cmbFormaPago.Size = new Size(182, 40);
             cmbFormaPago.TabIndex = 5;
@@ -100,7 +102,7 @@
             // 
             chkClienteFrecuente.AutoSize = true;
             chkClienteFrecuente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkClienteFrecuente.Location = new Point(356, 165);
+            chkClienteFrecuente.Location = new Point(611, 94);
             chkClienteFrecuente.Name = "chkClienteFrecuente";
             chkClienteFrecuente.Size = new Size(224, 36);
             chkClienteFrecuente.TabIndex = 6;
@@ -111,7 +113,7 @@
             // 
             rbMasculino.AutoSize = true;
             rbMasculino.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbMasculino.Location = new Point(145, 244);
+            rbMasculino.Location = new Point(153, 170);
             rbMasculino.Name = "rbMasculino";
             rbMasculino.Size = new Size(148, 36);
             rbMasculino.TabIndex = 7;
@@ -123,7 +125,7 @@
             // 
             rbFemenino.AutoSize = true;
             rbFemenino.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbFemenino.Location = new Point(365, 244);
+            rbFemenino.Location = new Point(373, 170);
             rbFemenino.Name = "rbFemenino";
             rbFemenino.Size = new Size(146, 36);
             rbFemenino.TabIndex = 8;
@@ -131,12 +133,22 @@
             rbFemenino.Text = "Femenino";
             rbFemenino.UseVisualStyleBackColor = true;
             // 
+            // dgvClientes
+            // 
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.Location = new Point(90, 262);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.RowHeadersWidth = 62;
+            dgvClientes.Size = new Size(360, 225);
+            dgvClientes.TabIndex = 9;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(878, 444);
+            ClientSize = new Size(878, 565);
+            Controls.Add(dgvClientes);
             Controls.Add(rbFemenino);
             Controls.Add(rbMasculino);
             Controls.Add(chkClienteFrecuente);
@@ -149,6 +161,8 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro de Cliente";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,5 +178,6 @@
         private CheckBox chkClienteFrecuente;
         private RadioButton rbMasculino;
         private RadioButton rbFemenino;
+        private DataGridView dgvClientes;
     }
 }
