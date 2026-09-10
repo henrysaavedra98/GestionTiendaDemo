@@ -76,6 +76,7 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(307, 39);
             txtTelefono.TabIndex = 3;
+            txtTelefono.KeyPress += txtTelefono_KeyPress;
             // 
             // btRegistrar
             // 
@@ -92,7 +93,6 @@
             // 
             cmbFormaPago.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbFormaPago.FormattingEnabled = true;
-            cmbFormaPago.Items.AddRange(new object[] { "Contado", "Credito" });
             cmbFormaPago.Location = new Point(630, 27);
             cmbFormaPago.Name = "cmbFormaPago";
             cmbFormaPago.Size = new Size(182, 40);
@@ -136,10 +136,10 @@
             // dgvClientes
             // 
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(90, 262);
+            dgvClientes.Location = new Point(101, 288);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 62;
-            dgvClientes.Size = new Size(360, 225);
+            dgvClientes.Size = new Size(711, 225);
             dgvClientes.TabIndex = 9;
             // 
             // Form1

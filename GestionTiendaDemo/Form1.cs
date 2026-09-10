@@ -12,6 +12,12 @@ namespace GestionTiendaDemo
 
         private void btRegistrar_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos())
+            {
+                return;
+            }
+
+
             string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
@@ -42,6 +48,27 @@ namespace GestionTiendaDemo
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);
             dgvClientes.DataSource = tabla;
+
+            cmbFormaPago.Items.Add("Contado");
+            cmbFormaPago.Items.Add("Crédito");
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private bool ValidarCampos()
+        {
+            if (txtNombre.Text == "" || txtTelefono.Text == "")
+            {
+                MessageBox.Show("Por favor completa todos los campos antes de continuar.");
+                return false;
+            }
+            return true;
         }
     }
 }
