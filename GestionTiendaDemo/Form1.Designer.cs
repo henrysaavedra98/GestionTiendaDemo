@@ -38,6 +38,7 @@
             rbMasculino = new RadioButton();
             rbFemenino = new RadioButton();
             dgvClientes = new DataGridView();
+            txtNombreSeleccionado = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -142,12 +143,20 @@
             dgvClientes.Size = new Size(711, 225);
             dgvClientes.TabIndex = 9;
             // 
+            // txtNombreSeleccionado
+            // 
+            txtNombreSeleccionado.Location = new Point(105, 240);
+            txtNombreSeleccionado.Name = "txtNombreSeleccionado";
+            txtNombreSeleccionado.Size = new Size(150, 31);
+            txtNombreSeleccionado.TabIndex = 10;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(878, 565);
+            Controls.Add(txtNombreSeleccionado);
             Controls.Add(dgvClientes);
             Controls.Add(rbFemenino);
             Controls.Add(rbMasculino);
@@ -179,5 +188,6 @@
         private RadioButton rbMasculino;
         private RadioButton rbFemenino;
         private DataGridView dgvClientes;
+        private TextBox txtNombreSeleccionado;
     }
 }

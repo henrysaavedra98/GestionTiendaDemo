@@ -49,6 +49,8 @@ namespace GestionTiendaDemo
             adaptador.Fill(tabla);
             dgvClientes.DataSource = tabla;
 
+            txtNombreSeleccionado.DataBindings.Add("Text", tabla, "Nombre");
+
             cmbFormaPago.Items.Add("Contado");
             cmbFormaPago.Items.Add("Crédito");
         }
