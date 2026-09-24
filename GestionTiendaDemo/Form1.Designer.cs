@@ -42,6 +42,10 @@
             txtProductoID = new TextBox();
             txtCantidad = new TextBox();
             btnRegistrarVenta = new Button();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -148,28 +152,28 @@
             // 
             // txtNombreSeleccionado
             // 
-            txtNombreSeleccionado.Location = new Point(101, 244);
+            txtNombreSeleccionado.Location = new Point(287, 357);
             txtNombreSeleccionado.Name = "txtNombreSeleccionado";
             txtNombreSeleccionado.Size = new Size(150, 31);
             txtNombreSeleccionado.TabIndex = 10;
             // 
             // txtProductoID
             // 
-            txtProductoID.Location = new Point(101, 360);
+            txtProductoID.Location = new Point(287, 283);
             txtProductoID.Name = "txtProductoID";
             txtProductoID.Size = new Size(150, 31);
             txtProductoID.TabIndex = 11;
             // 
             // txtCantidad
             // 
-            txtCantidad.Location = new Point(358, 360);
+            txtCantidad.Location = new Point(630, 283);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(150, 31);
             txtCantidad.TabIndex = 12;
             // 
             // btnRegistrarVenta
             // 
-            btnRegistrarVenta.Location = new Point(599, 357);
+            btnRegistrarVenta.Location = new Point(512, 357);
             btnRegistrarVenta.Name = "btnRegistrarVenta";
             btnRegistrarVenta.Size = new Size(213, 34);
             btnRegistrarVenta.TabIndex = 13;
@@ -177,12 +181,51 @@
             btnRegistrarVenta.UseVisualStyleBackColor = true;
             btnRegistrarVenta.Click += btnRegistrarVenta_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(95, 360);
+            label3.Name = "label3";
+            label3.Size = new Size(176, 25);
+            label3.TabIndex = 14;
+            label3.Text = "Cliente seleccionado:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(101, 286);
+            label4.Name = "label4";
+            label4.Size = new Size(112, 25);
+            label4.TabIndex = 15;
+            label4.Text = "Producto ID:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(512, 286);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 25);
+            label5.TabIndex = 16;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(512, 283);
+            label6.Name = "label6";
+            label6.Size = new Size(92, 25);
+            label6.TabIndex = 17;
+            label6.Text = "Cantidad: ";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(878, 658);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(btnRegistrarVenta);
             Controls.Add(txtCantidad);
             Controls.Add(txtProductoID);
@@ -222,5 +265,9 @@
         private TextBox txtProductoID;
         private TextBox txtCantidad;
         private Button btnRegistrarVenta;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
     }
 }
