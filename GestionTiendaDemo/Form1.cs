@@ -72,5 +72,24 @@ namespace GestionTiendaDemo
             }
             return true;
         }
+
+        private void btnRegistrarVenta_Click(object sender, EventArgs e)
+        {
+            int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+            string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string sql = "INSERT INTO Venta (ClienteID, ProductoID, Cantidad) " +
+                         "VALUES (@ClienteID, @ProductoID, @Cantidad)";
+            SqlCommand comando = new SqlCommand(sql, conexion);
+            comando.Parameters.Add("@ClienteID", SqlDbType.Int).Value = clienteId;
+            comando.Parameters.Add("@ProductoID", SqlDbType.Int).Value = Convert.ToInt32(txtProductoID.Text);
+            comando.Parameters.Add("@Cantidad", SqlDbType.Int).Value = Convert.ToInt32(txtCantidad.Text);
+            comando.ExecuteNonQuery();
+
+            conexion.Close();
+            MessageBox.Show("Venta registrada correctamente.");
+        }
     }
 }

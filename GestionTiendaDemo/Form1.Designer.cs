@@ -39,6 +39,9 @@
             rbFemenino = new RadioButton();
             dgvClientes = new DataGridView();
             txtNombreSeleccionado = new TextBox();
+            txtProductoID = new TextBox();
+            txtCantidad = new TextBox();
+            btnRegistrarVenta = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -137,7 +140,7 @@
             // dgvClientes
             // 
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(101, 288);
+            dgvClientes.Location = new Point(101, 408);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 62;
             dgvClientes.Size = new Size(711, 225);
@@ -145,17 +148,44 @@
             // 
             // txtNombreSeleccionado
             // 
-            txtNombreSeleccionado.Location = new Point(105, 240);
+            txtNombreSeleccionado.Location = new Point(101, 244);
             txtNombreSeleccionado.Name = "txtNombreSeleccionado";
             txtNombreSeleccionado.Size = new Size(150, 31);
             txtNombreSeleccionado.TabIndex = 10;
+            // 
+            // txtProductoID
+            // 
+            txtProductoID.Location = new Point(101, 360);
+            txtProductoID.Name = "txtProductoID";
+            txtProductoID.Size = new Size(150, 31);
+            txtProductoID.TabIndex = 11;
+            // 
+            // txtCantidad
+            // 
+            txtCantidad.Location = new Point(358, 360);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(150, 31);
+            txtCantidad.TabIndex = 12;
+            // 
+            // btnRegistrarVenta
+            // 
+            btnRegistrarVenta.Location = new Point(599, 357);
+            btnRegistrarVenta.Name = "btnRegistrarVenta";
+            btnRegistrarVenta.Size = new Size(213, 34);
+            btnRegistrarVenta.TabIndex = 13;
+            btnRegistrarVenta.Text = "Registrar Venta";
+            btnRegistrarVenta.UseVisualStyleBackColor = true;
+            btnRegistrarVenta.Click += btnRegistrarVenta_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
-            ClientSize = new Size(878, 565);
+            ClientSize = new Size(878, 658);
+            Controls.Add(btnRegistrarVenta);
+            Controls.Add(txtCantidad);
+            Controls.Add(txtProductoID);
             Controls.Add(txtNombreSeleccionado);
             Controls.Add(dgvClientes);
             Controls.Add(rbFemenino);
@@ -189,5 +219,8 @@
         private RadioButton rbFemenino;
         private DataGridView dgvClientes;
         private TextBox txtNombreSeleccionado;
+        private TextBox txtProductoID;
+        private TextBox txtCantidad;
+        private Button btnRegistrarVenta;
     }
 }
