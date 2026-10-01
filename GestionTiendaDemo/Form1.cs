@@ -5,11 +5,48 @@ namespace GestionTiendaDemo
 {
     public partial class Form1 : Form
     {
+        // Campos
+        private string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
+        
+        // Constructor
         public Form1()
         {
             InitializeComponent();
         }
 
+        // Arranque del formulario
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CargarClientes();
+            cmbFormaPago.Items.Add("Contado");
+            cmbFormaPago.Items.Add("Crédito");
+        }
+
+        // Métodos de apoyo
+        private void CargarClientes()
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            SqlDataAdapter adaptador = new SqlDataAdapter("SELECT * FROM Cliente", conexion);
+            DataTable tabla = new DataTable();
+            adaptador.Fill(tabla);
+            dgvClientes.DataSource = tabla;
+
+
+            txtNombreSeleccionado.DataBindings.Clear();
+            txtNombreSeleccionado.DataBindings.Add("Text", tabla, "Nombre");
+        }
+
+        private bool ValidarCampos()
+        {
+            if (txtNombre.Text == "" || txtTelefono.Text == "")
+            {
+                MessageBox.Show("Por favor completa todos los campos antes de continuar.");
+                return false;
+            }
+            return true;
+        }
+
+        // CRUD de Cliente (en orden: Crear, Leer, Actualizar, Eliminar)
         private void btRegistrar_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos())
@@ -17,8 +54,6 @@ namespace GestionTiendaDemo
                 return;
             }
 
-
-            string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
@@ -39,22 +74,61 @@ namespace GestionTiendaDemo
                 ". Cliente frecuente: " + chkClienteFrecuente.Checked +
                 ". Sexo: " + (rbMasculino.Checked ? "Masculino" : "Femenino"));
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
-            SqlConnection conexion = new SqlConnection(cadenaConexion);
-            SqlDataAdapter adaptador = new SqlDataAdapter("SELECT * FROM Cliente", conexion);
-            DataTable tabla = new DataTable();
-            adaptador.Fill(tabla);
-            dgvClientes.DataSource = tabla;
+            if (dgvClientes.CurrentRow == null) return;
 
-            txtNombreSeleccionado.DataBindings.Add("Text", tabla, "Nombre");
-
-            cmbFormaPago.Items.Add("Contado");
-            cmbFormaPago.Items.Add("Crédito");
+            txtNombre.Text = dgvClientes.CurrentRow.Cells["Nombre"].Value.ToString();
+            txtTelefono.Text = dgvClientes.CurrentRow.Cells["Telefono"].Value.ToString();
         }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string sql = "UPDATE Cliente SET Nombre = @Nombre, Telefono = @Telefono " +
+                         "WHERE ClienteID = @ClienteID";
+            SqlCommand comando = new SqlCommand(sql, conexion);
+            comando.Parameters.AddWithValue("@Nombre", txtNombre.Text);
+            comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
+            comando.Parameters.AddWithValue("@ClienteID", clienteId);
+            comando.ExecuteNonQuery();
+
+            conexion.Close();
+            CargarClientes();
+            txtNombre.Clear();
+            txtTelefono.Clear();
+            MessageBox.Show("Cliente actualizado correctamente.");
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+
+            DialogResult confirmacion = MessageBox.Show(
+                "¿Seguro que deseas eliminar este cliente?", "Confirmar",
+                MessageBoxButtons.YesNo);
+            if (confirmacion != DialogResult.Yes) return;
+
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string sql = "DELETE FROM Cliente WHERE ClienteID = @ClienteID";
+            SqlCommand comando = new SqlCommand(sql, conexion);
+            comando.Parameters.AddWithValue("@ClienteID", clienteId);
+            comando.ExecuteNonQuery();
+
+            conexion.Close();
+            CargarClientes();
+            txtNombre.Clear();
+            txtTelefono.Clear();
+            MessageBox.Show("Cliente eliminado correctamente.");
+        }
+
+        // Validación de entrada
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
@@ -63,20 +137,10 @@ namespace GestionTiendaDemo
             }
         }
 
-        private bool ValidarCampos()
-        {
-            if (txtNombre.Text == "" || txtTelefono.Text == "")
-            {
-                MessageBox.Show("Por favor completa todos los campos antes de continuar.");
-                return false;
-            }
-            return true;
-        }
-
+        // Funcionalidad de Venta
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
             int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
-            string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
@@ -89,7 +153,14 @@ namespace GestionTiendaDemo
             comando.ExecuteNonQuery();
 
             conexion.Close();
+            CargarClientes();
+            txtNombre.Clear();
+            txtTelefono.Clear();
             MessageBox.Show("Venta registrada correctamente.");
         }
+
+        
+        
+        
     }
 }

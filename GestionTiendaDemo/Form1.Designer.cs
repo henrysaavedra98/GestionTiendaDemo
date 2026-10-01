@@ -46,6 +46,8 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            btnActualizar = new Button();
+            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -89,9 +91,9 @@
             // btRegistrar
             // 
             btRegistrar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btRegistrar.Location = new Point(545, 150);
+            btRegistrar.Location = new Point(80, 209);
             btRegistrar.Name = "btRegistrar";
-            btRegistrar.Size = new Size(290, 77);
+            btRegistrar.Size = new Size(228, 77);
             btRegistrar.TabIndex = 4;
             btRegistrar.Text = "Registrar";
             btRegistrar.UseVisualStyleBackColor = true;
@@ -121,7 +123,7 @@
             // 
             rbMasculino.AutoSize = true;
             rbMasculino.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbMasculino.Location = new Point(153, 170);
+            rbMasculino.Location = new Point(153, 151);
             rbMasculino.Name = "rbMasculino";
             rbMasculino.Size = new Size(148, 36);
             rbMasculino.TabIndex = 7;
@@ -133,7 +135,7 @@
             // 
             rbFemenino.AutoSize = true;
             rbFemenino.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rbFemenino.Location = new Point(373, 170);
+            rbFemenino.Location = new Point(373, 151);
             rbFemenino.Name = "rbFemenino";
             rbFemenino.Size = new Size(146, 36);
             rbFemenino.TabIndex = 8;
@@ -144,36 +146,37 @@
             // dgvClientes
             // 
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Location = new Point(101, 408);
+            dgvClientes.Location = new Point(80, 307);
             dgvClientes.Name = "dgvClientes";
             dgvClientes.RowHeadersWidth = 62;
-            dgvClientes.Size = new Size(711, 225);
+            dgvClientes.Size = new Size(768, 225);
             dgvClientes.TabIndex = 9;
+            dgvClientes.CellClick += dgvClientes_CellClick;
             // 
             // txtNombreSeleccionado
             // 
-            txtNombreSeleccionado.Location = new Point(287, 357);
+            txtNombreSeleccionado.Location = new Point(291, 618);
             txtNombreSeleccionado.Name = "txtNombreSeleccionado";
             txtNombreSeleccionado.Size = new Size(150, 31);
             txtNombreSeleccionado.TabIndex = 10;
             // 
             // txtProductoID
             // 
-            txtProductoID.Location = new Point(287, 283);
+            txtProductoID.Location = new Point(291, 569);
             txtProductoID.Name = "txtProductoID";
             txtProductoID.Size = new Size(150, 31);
             txtProductoID.TabIndex = 11;
             // 
             // txtCantidad
             // 
-            txtCantidad.Location = new Point(630, 283);
+            txtCantidad.Location = new Point(634, 569);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(150, 31);
             txtCantidad.TabIndex = 12;
             // 
             // btnRegistrarVenta
             // 
-            btnRegistrarVenta.Location = new Point(512, 357);
+            btnRegistrarVenta.Location = new Point(516, 618);
             btnRegistrarVenta.Name = "btnRegistrarVenta";
             btnRegistrarVenta.Size = new Size(213, 34);
             btnRegistrarVenta.TabIndex = 13;
@@ -184,7 +187,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(95, 360);
+            label3.Location = new Point(99, 621);
             label3.Name = "label3";
             label3.Size = new Size(176, 25);
             label3.TabIndex = 14;
@@ -193,7 +196,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(101, 286);
+            label4.Location = new Point(105, 572);
             label4.Name = "label4";
             label4.Size = new Size(112, 25);
             label4.TabIndex = 15;
@@ -202,7 +205,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(512, 286);
+            label5.Location = new Point(516, 572);
             label5.Name = "label5";
             label5.Size = new Size(0, 25);
             label5.TabIndex = 16;
@@ -210,11 +213,33 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(512, 283);
+            label6.Location = new Point(516, 569);
             label6.Name = "label6";
             label6.Size = new Size(92, 25);
             label6.TabIndex = 17;
             label6.Text = "Cantidad: ";
+            // 
+            // btnActualizar
+            // 
+            btnActualizar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnActualizar.Location = new Point(352, 209);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(226, 77);
+            btnActualizar.TabIndex = 18;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnEliminar.Location = new Point(611, 209);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(201, 77);
+            btnEliminar.TabIndex = 19;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // Form1
             // 
@@ -222,6 +247,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(878, 658);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnActualizar);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -269,5 +296,7 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private Button btnActualizar;
+        private Button btnEliminar;
     }
 }
