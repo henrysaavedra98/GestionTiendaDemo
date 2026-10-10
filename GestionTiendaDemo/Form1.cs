@@ -7,7 +7,7 @@ namespace GestionTiendaDemo
     {
         // Campos
         private string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
-        
+
         // Constructor
         public Form1()
         {
@@ -80,6 +80,8 @@ namespace GestionTiendaDemo
 
             txtNombre.Text = dgvClientes.CurrentRow.Cells["Nombre"].Value.ToString();
             txtTelefono.Text = dgvClientes.CurrentRow.Cells["Telefono"].Value.ToString();
+            cmbFormaPago.Text = dgvClientes.CurrentRow.Cells["FormaPago"].Value.ToString();
+            chkClienteFrecuente.Checked = Convert.ToBoolean(dgvClientes.CurrentRow.Cells["ClienteFrecuente"].Value);
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -159,8 +161,16 @@ namespace GestionTiendaDemo
             MessageBox.Show("Venta registrada correctamente.");
         }
 
-        
-        
-        
+        private void btnProbarClase_Click(object sender, EventArgs e)
+        {
+            Cliente cliente1 = new Cliente();
+            cliente1.Nombre = txtNombre.Text;
+            cliente1.Telefono = txtTelefono.Text;
+            cliente1.FormaPago = cmbFormaPago.Text;
+            cliente1.ClienteFrecuente = chkClienteFrecuente.Checked;
+            cliente1.Sexo = rbMasculino.Checked ? "Masculino" : "Femenino";
+
+            MessageBox.Show(cliente1.Saludar() + "\nDescuento: " + cliente1.CalcularDescuento() + "%");
+        }
     }
 }

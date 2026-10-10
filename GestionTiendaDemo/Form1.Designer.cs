@@ -48,6 +48,7 @@
             label6 = new Label();
             btnActualizar = new Button();
             btnEliminar = new Button();
+            btnProbarClase = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -176,9 +177,9 @@
             // 
             // btnRegistrarVenta
             // 
-            btnRegistrarVenta.Location = new Point(516, 618);
+            btnRegistrarVenta.Location = new Point(491, 616);
             btnRegistrarVenta.Name = "btnRegistrarVenta";
-            btnRegistrarVenta.Size = new Size(213, 34);
+            btnRegistrarVenta.Size = new Size(186, 34);
             btnRegistrarVenta.TabIndex = 13;
             btnRegistrarVenta.Text = "Registrar Venta";
             btnRegistrarVenta.UseVisualStyleBackColor = true;
@@ -241,12 +242,23 @@
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
+            // btnProbarClase
+            // 
+            btnProbarClase.Location = new Point(700, 616);
+            btnProbarClase.Name = "btnProbarClase";
+            btnProbarClase.Size = new Size(135, 34);
+            btnProbarClase.TabIndex = 20;
+            btnProbarClase.Text = "Probar clase";
+            btnProbarClase.UseVisualStyleBackColor = true;
+            btnProbarClase.Click += btnProbarClase_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSteelBlue;
             ClientSize = new Size(878, 658);
+            Controls.Add(btnProbarClase);
             Controls.Add(btnEliminar);
             Controls.Add(btnActualizar);
             Controls.Add(label6);
@@ -298,5 +310,6 @@
         private Label label6;
         private Button btnActualizar;
         private Button btnEliminar;
+        private Button btnProbarClase;
     }
 }
