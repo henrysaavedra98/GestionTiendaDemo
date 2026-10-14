@@ -96,21 +96,45 @@ namespace GestionTiendaDemo
             txtTelefono.Text = dgvClientes.CurrentRow.Cells["Telefono"].Value.ToString();
             cmbFormaPago.Text = dgvClientes.CurrentRow.Cells["FormaPago"].Value.ToString();
             chkClienteFrecuente.Checked = Convert.ToBoolean(dgvClientes.CurrentRow.Cells["ClienteFrecuente"].Value);
+
+            string sexo = dgvClientes.CurrentRow.Cells["Sexo"].Value.ToString();
+            rbMasculino.Checked = (sexo == "Masculino");
+            rbFemenino.Checked = (sexo == "Femenino");
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+            if (dgvClientes.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un cliente de la lista.");
+                return;
+            }
+            if (!ValidarCampos())
+            {
+                return;
+            }
+
+            Cliente cliente = new Cliente();
+            cliente.ClienteID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+            cliente.Nombre = txtNombre.Text.Trim();
+            cliente.Telefono = txtTelefono.Text.Trim();
+            cliente.FormaPago = cmbFormaPago.Text;
+            cliente.ClienteFrecuente = chkClienteFrecuente.Checked;
+            cliente.Sexo = rbMasculino.Checked ? "Masculino" : "Femenino";
 
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
-            string sql = "UPDATE Cliente SET Nombre = @Nombre, Telefono = @Telefono " +
-                         "WHERE ClienteID = @ClienteID";
+            string sql = "UPDATE Cliente SET Nombre = @Nombre, Telefono = @Telefono, " +
+                         "FormaPago = @FormaPago, ClienteFrecuente = @ClienteFrecuente, " +
+                         "Sexo = @Sexo WHERE ClienteID = @ClienteID";
             SqlCommand comando = new SqlCommand(sql, conexion);
-            comando.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-            comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-            comando.Parameters.AddWithValue("@ClienteID", clienteId);
+            comando.Parameters.Add("@Nombre", SqlDbType.VarChar, 100).Value = cliente.Nombre;
+            comando.Parameters.Add("@Telefono", SqlDbType.VarChar, 20).Value = cliente.Telefono;
+            comando.Parameters.Add("@FormaPago", SqlDbType.VarChar, 20).Value = cliente.FormaPago;
+            comando.Parameters.Add("@ClienteFrecuente", SqlDbType.Bit).Value = cliente.ClienteFrecuente;
+            comando.Parameters.Add("@Sexo", SqlDbType.VarChar, 10).Value = cliente.Sexo;
+            comando.Parameters.Add("@ClienteID", SqlDbType.Int).Value = cliente.ClienteID;
             comando.ExecuteNonQuery();
 
             conexion.Close();
@@ -122,26 +146,44 @@ namespace GestionTiendaDemo
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int clienteId = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+            if (dgvClientes.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un cliente de la lista.");
+                return;
+            }
+
+            Cliente cliente = new Cliente();
+            cliente.ClienteID = Convert.ToInt32(dgvClientes.CurrentRow.Cells["ClienteID"].Value);
+            cliente.Nombre = dgvClientes.CurrentRow.Cells["Nombre"].Value.ToString();
 
             DialogResult confirmacion = MessageBox.Show(
-                "¿Seguro que deseas eliminar este cliente?", "Confirmar",
+                "¿Seguro que deseas eliminar a " + cliente.Nombre + "?", "Confirmar",
                 MessageBoxButtons.YesNo);
             if (confirmacion != DialogResult.Yes) return;
 
             SqlConnection conexion = new SqlConnection(cadenaConexion);
-            conexion.Open();
+            try
+            {
+                conexion.Open();
 
-            string sql = "DELETE FROM Cliente WHERE ClienteID = @ClienteID";
-            SqlCommand comando = new SqlCommand(sql, conexion);
-            comando.Parameters.AddWithValue("@ClienteID", clienteId);
-            comando.ExecuteNonQuery();
+                string sql = "DELETE FROM Cliente WHERE ClienteID = @ClienteID";
+                SqlCommand comando = new SqlCommand(sql, conexion);
+                comando.Parameters.Add("@ClienteID", SqlDbType.Int).Value = cliente.ClienteID;
+                comando.ExecuteNonQuery();
 
-            conexion.Close();
-            CargarClientes();
-            txtNombre.Clear();
-            txtTelefono.Clear();
-            MessageBox.Show("Cliente eliminado correctamente.");
+                CargarClientes();
+                txtNombre.Clear();
+                txtTelefono.Clear();
+                MessageBox.Show("Cliente eliminado correctamente.");
+            }
+            catch (SqlException ex) when (ex.Number == 547)
+            {
+                MessageBox.Show("No se puede eliminar: el cliente tiene ventas registradas.");
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
 
         // Validación de entrada
