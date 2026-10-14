@@ -43,6 +43,11 @@ namespace GestionTiendaDemo
                 MessageBox.Show("Por favor completa todos los campos antes de continuar.");
                 return false;
             }
+            if (cmbFormaPago.SelectedIndex == -1)
+            {
+                MessageBox.Show("Elige la forma de pago.");
+                return false;
+            }
             return true;
         }
 
@@ -54,25 +59,34 @@ namespace GestionTiendaDemo
                 return;
             }
 
+            // 1. Crear el objeto y llenarlo desde los controles
+            Cliente nuevoCliente = new Cliente();
+            nuevoCliente.Nombre = txtNombre.Text.Trim();
+            nuevoCliente.Telefono = txtTelefono.Text.Trim();
+            nuevoCliente.FormaPago = cmbFormaPago.Text;
+            nuevoCliente.ClienteFrecuente = chkClienteFrecuente.Checked;
+            nuevoCliente.Sexo = rbMasculino.Checked ? "Masculino" : "Femenino";
+
+            // 2. INSERT con parámetros tipados, leyendo del objeto
             SqlConnection conexion = new SqlConnection(cadenaConexion);
             conexion.Open();
 
             string sql = "INSERT INTO Cliente (Nombre, Telefono, FormaPago, ClienteFrecuente, Sexo) " +
                          "VALUES (@Nombre, @Telefono, @FormaPago, @ClienteFrecuente, @Sexo)";
             SqlCommand comando = new SqlCommand(sql, conexion);
-            comando.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-            comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-            comando.Parameters.AddWithValue("@FormaPago", cmbFormaPago.SelectedItem);
-            comando.Parameters.AddWithValue("@ClienteFrecuente", chkClienteFrecuente.Checked);
-            comando.Parameters.AddWithValue("@Sexo", rbMasculino.Checked ? "Masculino" : "Femenino");
+            comando.Parameters.Add("@Nombre", SqlDbType.VarChar, 100).Value = nuevoCliente.Nombre;
+            comando.Parameters.Add("@Telefono", SqlDbType.VarChar, 20).Value = nuevoCliente.Telefono;
+            comando.Parameters.Add("@FormaPago", SqlDbType.VarChar, 20).Value = nuevoCliente.FormaPago;
+            comando.Parameters.Add("@ClienteFrecuente", SqlDbType.Bit).Value = nuevoCliente.ClienteFrecuente;
+            comando.Parameters.Add("@Sexo", SqlDbType.VarChar, 10).Value = nuevoCliente.Sexo;
             comando.ExecuteNonQuery();
+
             conexion.Close();
+            CargarClientes();
 
-
-            MessageBox.Show("Bienvenido/a " + txtNombre.Text +
-                ". Forma de pago: " + cmbFormaPago.SelectedItem +
-                ". Cliente frecuente: " + chkClienteFrecuente.Checked +
-                ". Sexo: " + (rbMasculino.Checked ? "Masculino" : "Femenino"));
+            // 3. Resultado con los métodos del objeto
+            MessageBox.Show(nuevoCliente.Saludar() +
+                "\nDescuento: " + nuevoCliente.CalcularDescuento() + "%");
         }
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -161,16 +175,5 @@ namespace GestionTiendaDemo
             MessageBox.Show("Venta registrada correctamente.");
         }
 
-        private void btnProbarClase_Click(object sender, EventArgs e)
-        {
-            Cliente cliente1 = new Cliente();
-            cliente1.Nombre = txtNombre.Text;
-            cliente1.Telefono = txtTelefono.Text;
-            cliente1.FormaPago = cmbFormaPago.Text;
-            cliente1.ClienteFrecuente = chkClienteFrecuente.Checked;
-            cliente1.Sexo = rbMasculino.Checked ? "Masculino" : "Femenino";
-
-            MessageBox.Show(cliente1.Saludar() + "\nDescuento: " + cliente1.CalcularDescuento() + "%");
-        }
     }
 }
