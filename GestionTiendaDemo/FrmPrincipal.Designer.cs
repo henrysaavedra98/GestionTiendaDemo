@@ -64,13 +64,13 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(267, 6);
+            toolStripSeparator1.Size = new Size(209, 6);
             // 
             // mnuSalir
             // 
             mnuSalir.Name = "mnuSalir";
             mnuSalir.ShortcutKeys = Keys.Control | Keys.Q;
-            mnuSalir.Size = new Size(270, 34);
+            mnuSalir.Size = new Size(212, 34);
             mnuSalir.Text = "Salir";
             mnuSalir.Click += mnuSalir_Click;
             // 
@@ -84,28 +84,28 @@
             // clientesToolStripMenuItem
             // 
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(198, 34);
+            clientesToolStripMenuItem.Size = new Size(270, 34);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
             // mnuProductos
             // 
             mnuProductos.Name = "mnuProductos";
-            mnuProductos.Size = new Size(198, 34);
+            mnuProductos.Size = new Size(270, 34);
             mnuProductos.Text = "Productos";
             mnuProductos.Click += mnuProductos_Click;
             // 
             // mnuCategorias
             // 
             mnuCategorias.Name = "mnuCategorias";
-            mnuCategorias.Size = new Size(198, 34);
+            mnuCategorias.Size = new Size(270, 34);
             mnuCategorias.Text = "Categorías";
             mnuCategorias.Click += mnuCategorias_Click;
             // 
             // mnuVentas
             // 
             mnuVentas.Name = "mnuVentas";
-            mnuVentas.Size = new Size(198, 34);
+            mnuVentas.Size = new Size(270, 34);
             mnuVentas.Text = "Ventas";
             mnuVentas.Click += mnuVentas_Click;
             // 
@@ -147,6 +147,7 @@
             MainMenuStrip = menuStrip1;
             Name = "FrmPrincipal";
             Text = "FrmPrincipal";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
