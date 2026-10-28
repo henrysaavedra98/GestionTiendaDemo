@@ -171,6 +171,7 @@
             Controls.Add(txtNombre);
             Name = "FrmProductos";
             Text = "FrmProductos";
+            WindowState = FormWindowState.Maximized;
             Load += FrmProductos_Load;
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
             ResumeLayout(false);

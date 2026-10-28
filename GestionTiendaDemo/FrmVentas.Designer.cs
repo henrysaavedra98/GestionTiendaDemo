@@ -168,6 +168,7 @@
             Controls.Add(cmbCliente);
             Name = "FrmVentas";
             Text = "FrmVentas";
+            WindowState = FormWindowState.Maximized;
             Load += FrmVentas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvVentas).EndInit();
             ResumeLayout(false);

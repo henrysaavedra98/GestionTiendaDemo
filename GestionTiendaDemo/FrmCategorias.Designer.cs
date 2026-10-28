@@ -144,6 +144,7 @@
             Controls.Add(txtNombre);
             Name = "FrmCategorias";
             Text = "FrmCategorias";
+            WindowState = FormWindowState.Maximized;
             Load += FrmCategorias_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCategorias).EndInit();
             ResumeLayout(false);
