@@ -6,7 +6,7 @@ namespace GestionTiendaDemo
     public partial class Form1 : Form
     {
         // Campos
-        private string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string cadenaConexion = "Server=.\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
 
         // Constructor
         public Form1()

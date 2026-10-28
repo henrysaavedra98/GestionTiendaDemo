@@ -12,7 +12,7 @@ namespace GestionTiendaDemo
 {
     public partial class FrmInforme : Form
     {
-        private string cadenaConexion = "Server=WIN-5BE5AK9SIQ7\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
+        private string cadenaConexion = "Server=.\\SQLEXPRESS;Database=TiendaDemo;Trusted_Connection=True;TrustServerCertificate=True;";
         private ReportViewer visor = new ReportViewer();
         public FrmInforme()
         {
